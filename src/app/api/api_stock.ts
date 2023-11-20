@@ -25,6 +25,42 @@ export async function addUser(first_name:String, second_name:String, email:Strin
 
 }
 
+export async function addOfficer(name:String, division:String, category:String, nip: number){
+    try {
+        
+        const response =  await url.post<User[]>("/officer/store", {name, division, category, nip},
+         { headers: {'Content-Type': 'application/json', Accept: 'application/json', 
+         'Access-Control-Allow-Origin': '*',
+         'Access-Control-Allow-Headers': '*',
+         'Access-Control-Allow-Credentials': 'true',}, })
+        return response.data
+
+    } catch (error) {
+        
+        console.log(error)
+        
+    }   
+
+}
+
+export async function addWeapon(name: String, model: String, type: String, qtd_weapons_bullets: number, quantity_stock: number){
+    try {
+        
+        const response =  await url.post<User[]>("/weapon/store", {name, model, type, qtd_weapons_bullets, quantity_stock},
+         { headers: {'Content-Type': 'application/json', Accept: 'application/json', 
+         'Access-Control-Allow-Origin': '*',
+         'Access-Control-Allow-Headers': '*',
+         'Access-Control-Allow-Credentials': 'true',}, })
+        return response.data
+
+    } catch (error) {
+        
+        console.log(error)
+        
+    }   
+
+}
+
 export async function getUser(): Promise<User[]> {
     const response = await url.get("/user/")
 
@@ -67,6 +103,18 @@ export async function getSumWeapon(){
     return response.data
 }
 
+export async function getReceive(){
+    const response = await url.get("/receive/")
+
+    return response.data
+}
+
+export async function getOfficers(){
+    const response = await url.get("/officer/")
+
+    return response.data
+}
+
 
 
 // export const updateTodo = async (todo) => {
@@ -86,4 +134,8 @@ export const api = {
     LeavesCount,
     getWeapon,
     getSumWeapon,
+    getReceive,
+    addOfficer,
+    addWeapon,
+    getOfficers,
 }

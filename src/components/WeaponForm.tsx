@@ -1,194 +1,67 @@
 "use client"
 
-import Link from "next/link"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useFieldArray, useForm } from "react-hook-form"
-import * as z from "zod"
-
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/components/ui/use-toast"
+import { useState } from "react"
+import { useMutation, useQueryClient } from "react-query";
+import { api } from "@/app/api/api_stock";
+import { SyntheticEvent} from "react";
 
-const profileFormSchema = z.object({
-  name: z
-    .string()
-    .min(2, {
-      message: "O nome deve conter mais de 2 caracteres.",
-    })
-    .max(30, {
-      message: "O bone não deve conter mais de 30 caracteres.",
-    }),
-  unidade: z
-    .string()
-    .min(3, {
-        message: "A sua unidade deve conter mais de 3 caracteres.",
-    })
-    .max(20, {
-        message: "O bone não deve conter mais de 20 caracteres.",
-    }),
-  
-  category: z 
-    .string()
-    .min(5, {
-        message: "A sua patente deve conter mais de 5 caracteres.",
-    })
-    .max(20, {
-        message: "O patente não deve conter mais de 20 caracteres.",
-    }),
-  nip: z 
-  .string()
-  .min(8, {
-      message: "O seu nip deve conter mais de 8 caracteres.",
-  })
-  .max(11, {
-      message: "O seu nip não deve conter mais de 11 caracteres.",
-  }),
-  division:  z 
-  .string()
-  .min(8, {
-      message: "A sua unidade deve conter mais de 8 caracteres.",
-  })
-  .max(11, {
-      message: "A sua unidade não deve conter mais de 11 caracteres.",
-  }),
-
-
-})
-
-type ProfileFormValues = z.infer<typeof profileFormSchema>
-
-// This can come from your database or API.
-const defaultValues: Partial<ProfileFormValues> = {
-  
-  
-}
 
 export function WeaponForm() {
-  const form = useForm<ProfileFormValues>({
-    resolver: zodResolver(profileFormSchema),
-    defaultValues,
-    mode: "onChange",
-  })
 
-  const { fields, append } = useFieldArray({
-    name: "",
-    control: form.control,
-  })
+  const [name, setName] = useState()
+  const [model, setModel] = useState()
+  const [type, setType] = useState()
+  const [qtd_weapons_bullets, setQtdWeaponsBullets] = useState()
+  const [quantity_stock, setQuantityStock] = useState()
 
-  function onSubmit(data: ProfileFormValues) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
+  const weapon = {name, model, type, qtd_weapons_bullets, quantity_stock}
+
+  const {isLoading ,isError, mutate } = useMutation( () => 
+  api.addWeapon(name, model, type, qtd_weapons_bullets, quantity_stock),{
+  }
+)
+
+  function handleSubmit(event: SyntheticEvent){
+    event.preventDefault();
+    console.log(weapon)
+    mutate(name, model, type, qtd_weapons_bullets, quantity_stock)
   }
 
   return (
-    
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="">
+    <form className="" onSubmit={handleSubmit}>
             <div className="grid grid-cols-2 items-center border rounded-md p-5">
                 <div className="mx-5">
-                    <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Nome</FormLabel>
-                        <FormControl>
-                            <Input className="border-white" placeholder="Nome completo" {...field} />
-                        </FormControl>
-                        <FormDescription>
-                            Insira o nome completo, não é permitido alcunha ou nome que não faz parte do registro
-                        </FormDescription>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                    />
+                <h3 className="mt-2 text-sm font-bold ">Nome da arma</h3>
+                  <Input className="border-white  mt-2" value={name} onChange={(e) => setName(e.target.value)} placeholder="AK" />
+                  <h3 className="text-muted-foreground text-sm mt-2">Ex: AK, Glock</h3>
                 </div>
                 <div className="mx-5">
-                    <FormField
-                    control={form.control}
-                    name="division"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Unidade</FormLabel>
-                        <FormControl>
-                            <Input className="border-white" placeholder="PIR" {...field} />
-                        </FormControl>
-                        <FormDescription>
-                            Insira a unidade que faz parte. <br />Ex: SIC, PIR
-                        </FormDescription>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                    />
+                <h3 className="mt-2 text-sm font-bold">Modelo da arma</h3>
+                  <Input className="border-white mt-2" value={model} onChange={(e) => setModel(e.target.value)} placeholder="47"/>
+                  <h3 className="text-muted-foreground text-sm mt-2">Insira o modelo ou variante da arma</h3>
+               </div>
+                <div className="mx-5">
+                <h3 className="mt-2 text-sm font-bold ">Tipo de arma</h3>
+                  <Input className="border-white mt-2" value={type} onChange={(e)=> setType(e.target.value)} placeholder="semi-automática" />
+                  <h3 className="text-muted-foreground text-sm mt-2">O poder de fogo da arma <br /> Ex: Fuzil, semi-automática</h3>
                 </div>
                 <div className="mx-5">
-                    <FormField
-                    control={form.control}
-                    name="category"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Patente / Função</FormLabel>
-                        <FormControl>
-                            <Input className="border-white" placeholder="Sargento" {...field} />
-                        </FormControl>
-                        <FormDescription>
-
-                        </FormDescription>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                    />
+                <h3 className="mt-2 text-sm font-bold ">Capacidade de balas</h3>
+                  <Input type="number" min={8} defaultValue={15} value={qtd_weapons_bullets} onChange={(e)=> setQtdWeaponsBullets(e.target.value)} className="border-white mt-2" placeholder="" />
+                  <h3 className="text-muted-foreground text-sm mt-2">Quantidade de balas por carregador</h3>
                 </div>
                 <div className="mx-5">
-                    <FormField
-                    control={form.control}
-                    name="nip"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>NIP</FormLabel>
-                        <FormControl>
-                            <Input className="border-white" placeholder="000123456789" {...field} />
-                        </FormControl>
-                        <FormDescription>
-                            O nip deve corresponder ao agente 
-                        </FormDescription>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                    />
-
+                <h3 className="mt-2 text-sm font-bold ">Quantidade em stock</h3>
+                  <Input type="number" min={1} defaultValue={1} className="border-white mt-2" value={quantity_stock} onChange={(e)=> setQuantityStock(e.target.value)} placeholder="" />
+                  <h3 className="text-muted-foreground text-sm mt-2">O número de stock da arma</h3>
                 </div>
                 <div>
-                <Button className="mt-5 mx-5 w-72 h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" type="submit">Criar</Button>
-
+                  <Button className="mt-5 mx-5 w-72 h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" type="submit">Criar</Button>
                 </div>
                 
             </div>
       </form>
-    </Form>
   )
 }

@@ -73,7 +73,7 @@ export default function Home() {
             </CardContent>
             <CardFooter>
               {/* {isLoading ? <ButtonProcess/> : <Button className="w-full h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" onClick={handleClick} type="submit">Entrar</Button>} */}
-              <Button onClick={handleClick} className="w-full h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" type="submit">Entrar</Button>
+              <Button className="w-full h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" type="submit">Entrar</Button>
             </CardFooter>
         </Card>
       </form>

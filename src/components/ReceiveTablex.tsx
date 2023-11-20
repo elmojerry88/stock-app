@@ -9,15 +9,11 @@ import {
 } from "@/components/ui/card"
 import { api } from '@/app/api/api_stock';
 import { useQuery } from "react-query";
-import {
-    Avatar,
-    AvatarFallback,
-    AvatarImage,
-  } from "@/components/ui/avatar";
+
 
 
 export default function ReceiveTable(){
-    const { data, isError, isLoading } = useQuery("getUser", api.getUser);
+    const { data, isError, isLoading } = useQuery("getUser", api.getReceive);
 
     return (
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -50,27 +46,33 @@ export default function ReceiveTable(){
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b dark:bg-blue-950 dark:border-gray-800">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Apple MacBook Pro 17"
-                        </th>
-                        <td class="px-6 py-4">
-                            Silver
-                        </td>
-                        <td class="px-6 py-4">
-                            Laptop
-                        </td>
-                        <td class="px-6 py-4">
-                            $2999
-                        </td>
-                        <td class="px-6 py-4">
-                            $2999
-                        </td>
-                        <td class="px-6 py-4">
-                            $2999
-                        </td>
-                    
-                    </tr>
+
+                    {/* {data?.map((receive) => (
+
+                                <tr class="bg-white border-b dark:bg-blue-950 dark:border-gray-800">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {receive.name}
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {receive.nip_officer}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {receive.weapon}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {receive.weapons_number}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {receive.qtd_bullets}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {receive.created_at}
+                                    </td>
+
+                                </tr>
+
+
+                    ))} */}
                     
                 </tbody>
             </table>
