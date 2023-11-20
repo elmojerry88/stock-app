@@ -11,7 +11,7 @@ import Table from "@/components/Table";
 
 export function RecentSales() {
 
-  const { data, isError, isLoading } = useQuery("user-list", api.getUser);
+  const { data, isError, isLoading } = useQuery("getUser", api.getUser);
 
   
 

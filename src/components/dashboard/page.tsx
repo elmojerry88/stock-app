@@ -1,14 +1,3 @@
-import { Metadata } from "next"
-import Image from "next/image"
-
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 import {
   Tabs,
   TabsContent,
@@ -17,16 +6,15 @@ import {
 } from "@/components/ui/tabs"
 import { CalendarDateRangePicker } from "@/components/dashboard-components/date-range-picker"
 import { MainNav } from "@/components/dashboard-components/main-nav"
-import { Overview } from "@/components/dashboard-components/overview"
-import { RecentSales } from "@/components/dashboard-components/recent-sales"
-
 import TeamSwitcher from "@/components/dashboard-components/team-switcher"
 import { UserNav } from "@/components/dashboard-components/user-nav"
 import { ProfileForm } from "../profile-form"
-import Table from "../Table"
 import DashboardCards from "../card-dashboard"
 import { WeaponForm } from "../WeaponForm"
 import RegisterForm from "../RegisterForm"
+import WeaponTable from "../WeaponTable"
+import ReceiveTable from "../ReceiveTablex"
+import UsersTable from "../UsersTables"
 
 
 // export const metadata: Metadata = {
@@ -37,22 +25,6 @@ import RegisterForm from "../RegisterForm"
 export default function DashboardPage() {
   return (
     <>
-      {/* <div className="md:hidden">
-        <Image
-          src="/examples/dashboard-light.png"
-          width={1280}
-          height={866}
-          alt="Dashboard"
-          className="block dark:hidden"
-        />
-        <Image
-          src="/examples/dashboard-dark.png"
-          width={1280}
-          height={866}
-          alt="Dashboard"
-          className="hidden dark:block"
-        />
-      </div> */}
       <div className="flex-col md:flex">
         <div className="border-b">
           <div className="flex h-16 items-center px-4">
@@ -84,11 +56,16 @@ export default function DashboardPage() {
             </TabsList>
             <TabsContent value="overview" className="space-y-4">
               <DashboardCards/>
+            
+                <WeaponTable/>
+                <ReceiveTable />
+                <UsersTable />
+              
+              
             </TabsContent>
-            <TabsContent value="create-user" className="space-y-4">
+            <TabsContent value="create-user" className="space-y-5">
               <h2 className="text-3xl font-bold tracking-tight">Criar novo Agente</h2>
-                
-                  <ProfileForm/>
+                <ProfileForm/>
             </TabsContent>
             <TabsContent value="Adicionar arma" className="space-y-4">
               <h2 className="text-3xl font-bold tracking-tight">Adicionar nova arma no stock</h2>

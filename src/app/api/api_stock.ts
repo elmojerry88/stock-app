@@ -31,6 +31,43 @@ export async function getUser(): Promise<User[]> {
     return response.data
 }
 
+export async function officersCount(){
+    const response = await url.get("/officer/count")
+
+    return response.data
+}
+
+export async function UsersCount(){
+    const response = await url.get("/user/count")
+
+    return response.data
+}
+
+export async function WeaponsCount(){
+    const response = await url.get("/weapon/count")
+
+    return response.data
+}
+
+export async function LeavesCount(){
+    const response = await url.get("/leave/count")
+
+    return response.data
+}
+
+export async function getWeapon(){
+    const response = await url.get("/weapon")
+
+    return response.data
+}
+
+export async function getSumWeapon(){
+    const response = await url.get("/weapon/sum")
+
+    return response.data
+}
+
+
 
 // export const updateTodo = async (todo) => {
 //     return await todosApi.patch(`/todos/${todo.id}`, todo)
@@ -43,4 +80,10 @@ export async function getUser(): Promise<User[]> {
 export const api = {
     getUser,
     addUser,
+    officersCount,
+    UsersCount, 
+    WeaponsCount,
+    LeavesCount,
+    getWeapon,
+    getSumWeapon,
 }
