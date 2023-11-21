@@ -38,4 +38,6 @@ pnpm run dev
 
 ## NOTA:
 
-É necessário que tenha baixado o Back-End da aplicação, para uma experiência completa!
+- É necessário que tenha baixado o Back-End da aplicação, para uma experiência completa!
+- Essa aplicação sofrerá alterações, verique as branchs... pode ser que tenha uma nova versão da aplicação.
+
