@@ -6,7 +6,9 @@
 
 - Nodejs
 
-First, run the development server:
+## Instalação:
+
+- Após instalar o NodeJs, clique em *code*
 
 ```bash
 npm run dev
