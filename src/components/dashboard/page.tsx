@@ -56,14 +56,13 @@ export default function DashboardPage() {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="overview" className="space-y-4">
+              
               <DashboardCards/>
-            
-                <WeaponTable />
-                <ReceiveTable />
-                <UsersTable />
-                <OfficerTable/>
-              
-              
+              <WeaponTable />
+              <ReceiveTable />
+              <UsersTable />
+              <OfficerTable/>
+
             </TabsContent>
             <TabsContent value="create-user" className="space-y-5">
               <h2 className="text-3xl font-bold tracking-tight">Criar novo Agente</h2>

@@ -13,7 +13,7 @@ import { useQuery } from "react-query";
 
 
 export default function ReceiveTable(){
-    const { data, isError, isLoading } = useQuery("getUser", api.getReceive);
+    const { data, isError, isLoading } = useQuery("getReceive", api.getReceive);
 
     return (
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -47,11 +47,11 @@ export default function ReceiveTable(){
                 </thead>
                 <tbody>
 
-                    {/* {data?.map((receive) => (
+                    {data?.map((receive) => (
 
                                 <tr class="bg-white border-b dark:bg-blue-950 dark:border-gray-800">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {receive.name}
+                                        {receive.officer}
                                     </th>
                                     <td class="px-6 py-4">
                                         {receive.nip_officer}
@@ -60,7 +60,7 @@ export default function ReceiveTable(){
                                         {receive.weapon}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {receive.weapons_number}
+                                        {receive.weapon_number}
                                     </td>
                                     <td class="px-6 py-4">
                                         {receive.qtd_bullets}
@@ -72,7 +72,7 @@ export default function ReceiveTable(){
                                 </tr>
 
 
-                    ))} */}
+                    ))} 
                     
                 </tbody>
             </table>

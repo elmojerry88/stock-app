@@ -11,26 +11,26 @@ import Table from "@/components/Table";
 
 export function RecentSales() {
 
-  const { data, isError, isLoading } = useQuery("getUser", api.getUser);
+  const { data, isError, isLoading } = useQuery("getLeave", api.getLeave);
 
   
 
   return (
     <> 
       <div className="space-y-8">
-        {data?.map((user) => (
-          <div className="flex items-center" key={user.id}>
+        {data?.map((leave) => (
+          <div className="flex items-center" key={leave.id}>
             <Avatar className="h-9 w-9">
               <AvatarImage src="/avatars/01.png" alt="Avatar" />
-              <AvatarFallback> <Image width="10" height="10" src=""/> </AvatarFallback>
+              <AvatarFallback>PNA</AvatarFallback>
             </Avatar>
             <div className="ml-4 space-y-1" >
-              <p className="text-sm font-medium leading-none">{user.first_name}</p>
+              <p className="text-sm font-medium leading-none">{leave.officer}</p>
               <p className="text-sm text-muted-foreground">
-                {user.email}
+                {leave.id} - {leave.nip_officer}
               </p>
             </div>
-            <div className="ml-auto font-medium">{user.role}</div>
+            <div className="ml-auto font-medium">{leave.weapon} {leave.weapon_number}</div>
          </div>
         ))}
       </div>

@@ -1,13 +1,28 @@
 import axios, { GenericFormData } from "axios"
 import { User } from "../../models/User";
 
+import { error } from "console";
+import { toast } from "react-toastify";
+
+
 axios.defaults.withCredentials = true;
+
+axios.interceptors.response.use(undefined, (error)=> {
+    if (error.message === 'Network Error' && !error.response){
+        toast.error('Ago correu mal')
+    }
+})
 
 const url = axios.create({
     baseURL: "http://localhost:8000/api"
 })
 
+
+
+
 export async function addUser(first_name:String, second_name:String, email:String, password:String){
+    
+
     try {
         
         const response =  await url.post<User[]>("/user/store", {first_name, second_name, email, password},
@@ -20,7 +35,7 @@ export async function addUser(first_name:String, second_name:String, email:Strin
     } catch (error) {
         
         console.log(error)
-        
+      
     }   
 
 }
@@ -47,6 +62,42 @@ export async function addWeapon(name: String, model: String, type: String, qtd_w
     try {
         
         const response =  await url.post<User[]>("/weapon/store", {name, model, type, qtd_weapons_bullets, quantity_stock},
+         { headers: {'Content-Type': 'application/json', Accept: 'application/json', 
+         'Access-Control-Allow-Origin': '*',
+         'Access-Control-Allow-Headers': '*',
+         'Access-Control-Allow-Credentials': 'true',}, })
+        return response.data
+
+    } catch (error) {
+        
+        console.log(error)
+        
+    }   
+
+}
+
+
+export async function addReceive(officerReceive: String, weaponReceive: String, qtdBulletsReceive: number, weaponNumberReceive:string){
+    try {
+        
+        const response =  await url.post<User[]>("/receive/store", {officerReceive, weaponReceive, qtdBulletsReceive, weaponNumberReceive},
+         { headers: {'Content-Type': 'application/json', Accept: 'application/json', 
+         'Access-Control-Allow-Origin': '*',
+         'Access-Control-Allow-Headers': '*',
+         'Access-Control-Allow-Credentials': 'true',}, })
+        return response.data
+
+    } catch (error) {
+        
+        console.log(error)
+        
+    }   
+
+}
+export async function addLeave(officerLeave: String, weaponLeave: String, qtdBulletsLeave: number, weaponNumberLeave:string){
+    try {
+        
+        const response =  await url.post<User[]>("/leave/store", {officerLeave, weaponLeave, qtdBulletsLeave, weaponNumberLeave},
          { headers: {'Content-Type': 'application/json', Accept: 'application/json', 
          'Access-Control-Allow-Origin': '*',
          'Access-Control-Allow-Headers': '*',
@@ -115,6 +166,12 @@ export async function getOfficers(){
     return response.data
 }
 
+export async function getLeave(){
+    const response = await url.get("/leave/")
+
+    return response.data
+}
+
 
 
 // export const updateTodo = async (todo) => {
@@ -138,4 +195,7 @@ export const api = {
     addOfficer,
     addWeapon,
     getOfficers,
+    addReceive, 
+    getLeave,
+    addLeave,
 }

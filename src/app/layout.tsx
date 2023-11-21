@@ -5,7 +5,9 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { ThemeProvider } from "@/components/theme-provider"
 import { QueryClient, QueryClientProvider } from 'react-query'
-
+import { Toaster } from "@/components/ui/toaster"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 // export const metadata: Metadata = {
 //   title: 'APP STOCK',
@@ -33,6 +35,9 @@ export default function RootLayout({
            <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
         </ThemeProvider>
       </QueryClientProvider>
+      <Toaster />
+      <ToastContainer />
+
       </body>
     </html>
   )

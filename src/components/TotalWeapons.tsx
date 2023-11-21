@@ -15,7 +15,7 @@ import { useQuery } from "react-query";
 
 export default function TotalWeapons(){
 
-    const { data, isError, isLoading } = useQuery("WeaponsCount", api.getSumWeapon);
+    const { data, isError, isLoading } = useQuery("SumWeapon", api.getSumWeapon);
 
 
     return (

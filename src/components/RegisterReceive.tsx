@@ -26,10 +26,10 @@ export default function RegisterReceive(){
   }
 
     const {isLoading ,isError, mutate } = useMutation( () => 
-        api.addWeapon(officerReceive, weaponReceive, qtdBulletsReceive, weaponNumberReceive),{
+        api.addReceive(officerReceive, weaponReceive, qtdBulletsReceive, weaponNumberReceive),{
     })
 
-    const { data} = useQuery("getOfficer", api.getOfficers);
+    const { data} = useQuery("getWeapon", api.getWeapon);
 
     return (
         <form className="" onSubmit={handleSubmit}>
@@ -39,19 +39,19 @@ export default function RegisterReceive(){
                 <h3 className="text-sm text-muted-foreground col-span-4 mx-5 ">Formulário de cadastro de entradas</h3>
                 <div className="grid items-center">
                     <div className="mx-5">
-                        <h3 className="mt-2 text-sm font-bold">Nome da arma</h3>
-                        <SelectWeapon />
-                        <h3 className="text-muted-foreground text-sm mt-2">A arma entregue</h3>
+                        <h3 className="mt-2 text-sm font-bold">Nome do agente</h3>
+                        <Input className="border-white mt-2" required value={officerReceive} onChange={(e)=> setOfficerReceive(e.target.value)} placeholder="nome completo" />
+                        <h3 className="text-muted-foreground text-sm mt-2">O agente que devolveu a arma</h3>
                     </div>
                     <div className="mx-5">
-                        <h3 className="mt-2 text-sm font-bold">Nome do agente </h3>
-                        <select id="officers" class="border bg-background text-sm rounded-lg block w-full p-2.5 border-white mt-2">
-                            <option selected value={officerReceive} onSelect={(e)=> setOfficerReceive(e.target.value)} className="text-muted-foreground text-sm text-gray-600">Selecione o nome do agente</option>
+                        <h3 className="mt-2 text-sm font-bold"> Arma </h3>
+                        <select value={weaponReceive} onChange={(e)=> setWeaponReceive(e.target.value)} id="officers" class="border bg-background text-sm rounded-lg block w-full p-2.5 border-white mt-2">
+                            <option selected  className="text-muted-foreground text-sm text-gray-600">Selecione a arma</option>
                             {data?.map( (officer)=> (
                                 <option key={officer.id} value={officer.id}>{officer.name}</option>
                             ))}
                         </select>
-                        <h3 className="text-muted-foreground text-sm mt-2">O agente que devolveu a arma</h3>
+                        <h3 className="text-muted-foreground text-sm mt-2">A arma entregue</h3>
                     </div>
                     <div className="mx-5">
                         <h3 className="mt-2 text-sm font-bold ">Número de serie da arma</h3>
