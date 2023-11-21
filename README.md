@@ -1,6 +1,10 @@
-[Front-End da Aplicação de controlo de estoque](https://nextjs.org/) projecto desenvolvido por [Elmo Jerry]
+## Front-End da Aplicação de controlo de estoque
 
-## Getting Started
+## Desenvolvido por: Elmo Jerry Imperial Leitão
+
+## Requisitos
+
+- Nodejs
 
 First, run the development server:
 
