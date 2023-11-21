@@ -23,7 +23,7 @@ pnpm install
 ```
 Esse comado irá instalar todas as dependencias necessárias para rodar a aplicação.
 
-- Após a instalação, execute para iniciar o servidor local:
+- Após a instalação, inicie o servidor local:
 
 ```bash
 npm run dev
