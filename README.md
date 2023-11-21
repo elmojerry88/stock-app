@@ -4,8 +4,8 @@
 
 ## Requisitos
 
-- Nodejs, para baixar [clique aqui](https://nodejs.org/en/download/current).
-- Back-End, para baixar [clique aqui](https://github.com/elmojerry88/api_stock)
+- Nodejs - para baixar [clique aqui](https://nodejs.org/en/download/current).
+- Back-End - para baixar [clique aqui](https://github.com/elmojerry88/api_stock)
 
 ## Instalação:
 
@@ -33,9 +33,9 @@ yarn run dev
 pnpm run dev
 ```
 
-Abra [http://localhost:3000](http://localhost:3000) com o seu navegador para usar a aplicação.
+- Abra [http://localhost:3000](http://localhost:3000) com o seu navegador para usar a aplicação.
 
 
 ## NOTA:
 
-É necessário que tenha baixado o Back-End da aplicação, para uma experiência completa da aplicação!
+É necessário que tenha baixado o Back-End da aplicação, para uma experiência completa!
