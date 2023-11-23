@@ -6,8 +6,6 @@ import {
 } from "@/components/ui/avatar";
 import { api } from '@/app/api/api_stock';
 import { useQuery } from "react-query";
-import Image from 'next/image'
-import Table from "@/components/Table";
 
 export function RecentSales() {
 

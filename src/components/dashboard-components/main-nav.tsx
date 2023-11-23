@@ -17,26 +17,9 @@ export function MainNav({
           href=""
           className="text-sm font-medium transition-colors hover:text-slate-500"
         >
-          Overview
+          Polícia Nacional de Angola
         </Link>
-        <Link
-          href=""
-          className="text-sm font-medium text-muted-foreground transition-colors hover:text-slate-500"
-        >
-          Customers
-        </Link>
-        <Link
-          href=""
-          className="text-sm font-medium text-muted-foreground transition-colors hover:text-slate-500"
-        >
-          Products
-        </Link>
-        <Link
-          href=""
-          className="text-sm font-medium text-muted-foreground transition-colors hover:text-slate-500"
-        >
-          Settings
-        </Link>
+  
       </div>
 
     </nav>

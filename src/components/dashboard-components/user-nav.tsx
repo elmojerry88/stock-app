@@ -20,6 +20,7 @@ import { HiOutlineLogout } from "react-icons/hi";
 import { FaHouseUser } from "react-icons/fa";
 
 import { getServerSession } from "next-auth"
+import Link from "next/link"
 
 export async function UserNav() {
 
@@ -46,11 +47,11 @@ export async function UserNav() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            Perfil
+            <Link href="https://github.com/elmojerry88/stock-app">Código fonte Front-End</Link>
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            Definições
+            <Link href="https://github.com/elmojerry88/api_stock">Código font Back-End</Link>
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem> </DropdownMenuItem>

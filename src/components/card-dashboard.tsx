@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Overview } from "@/components/dashboard-components/overview"
-import { RecentSales } from "@/components/dashboard-components/recent-sales"
+import { RecentSales } from "@/components/dashboard-components/saidas"
 import TotalOfficers from "./TotalOfficers";
 import TotalUsers from "./TotalUsers";
 import TotalWeapons from "./TotalWeapons";
