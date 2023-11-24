@@ -6,7 +6,8 @@ import { useState } from "react"
 import { useMutation,  useQuery } from "react-query";
 import { api } from "@/app/api/api_stock";
 import { SyntheticEvent} from "react";
-import SelectWeapon from "./SelectWeapon";
+
+
 
 
 export default function RegisterReceive(){
@@ -50,6 +51,7 @@ export default function RegisterReceive(){
                             {data?.map( (officer)=> (
                                 <option key={officer.id} value={officer.id}>{officer.name}</option>
                             ))}
+                            
                         </select>
                         <h3 className="text-muted-foreground text-sm mt-2">A arma entregue</h3>
                     </div>

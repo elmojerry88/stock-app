@@ -6,6 +6,7 @@ import { useState } from "react"
 import { useMutation,  useQuery } from "react-query";
 import { api } from "@/app/api/api_stock";
 import { SyntheticEvent} from "react";
+import { useToast } from "./ui/use-toast";
 
 
 
@@ -15,25 +16,59 @@ export default function RegisterLeave(){
     const [weaponLeave, setWeaponLeave] = useState()
     const [qtdBulletsLeave, setQtdBulletsLeave] = useState()
     const [weaponNumberLeave, setWeaponNumberLeave] = useState()
-    
- 
+
+    const { toast } = useToast()
+
+
     const leave = {officerLeave, weaponLeave, qtdBulletsLeave, weaponNumberLeave}
 
     function handleSubmit(event: SyntheticEvent){
         event.preventDefault();
         console.log(leave)
         mutate(officerLeave, weaponLeave, qtdBulletsLeave, weaponNumberLeave)
+        
+
+
   }
 
-    const {isLoading ,isError, mutate } = useMutation( () => 
+    const {isLoading  , mutate , error} = useMutation( () =>
         api.addLeave(officerLeave, weaponLeave, qtdBulletsLeave, weaponNumberLeave),{
+            onSuccess: ()=> {
+                setOfficerLeave(""),
+                setWeaponLeave(""),
+                setQtdBulletsLeave(""),
+                setWeaponNumberLeave("")
+                // toast({
+                //     variant: "destructive",
+                //     title: "Uh oh! Something went wrong.",
+                //     description: "There was a problem with your request.",
+                // })
+                console.log(response)
+            },
+            onError: (error, variables, context) => {
+                toast({
+                    variant: "destructive",
+                    title: "esse é o teu erro",
+                    description: `${error}`  ,
+                })
+
+            }
+
+
+
+
+
+
     })
 
-    const { data} = useQuery("getWeapon", api.getWeapon);
+    const { data } = useQuery("getWeapon", api.getWeapon);
+   
 
     return (
         <form className="" onSubmit={handleSubmit}>
-            
+
+        
+
             <div className="grid gap-2 border rounded-md p-5 mt-2">
                 <h3 className="text-lg font-bold col-span-4 mx-5 ">Registro de saída</h3>
                 <h3 className="text-sm text-muted-foreground col-span-4 mx-5 ">Formulário de cadastro de entradas</h3>
