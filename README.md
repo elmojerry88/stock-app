@@ -39,6 +39,6 @@ pnpm run dev
 ## NOTA:
 
 - É necessário que tenha baixado o Back-End da aplicação, para uma experiência completa!
-- Por padrão o Back-End já trá consigo usuários, verique a documentação do Back-End [clicando aqui.](https://github.com/elmojerry88/api_stock)
+- Por padrão o Back-End já trás consigo usuários, verique a documentação do Back-End [clicando aqui.](https://github.com/elmojerry88/api_stock)
 - Essa aplicação sofrerá alterações, verique as branchs... pode ser que tenha uma nova versão da aplicação.
 
