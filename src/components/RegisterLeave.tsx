@@ -102,7 +102,7 @@ export default function RegisterLeave(){
                         <h3 className="text-muted-foreground text-sm mt-2">O número de balas entregue</h3>
                     </div>
                     <div>
-                        {isLoading ? <ButtonLoading/> : <Button className="mt-5 mx-5 w-72 h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" type="submit">Entrada</Button>}
+                        {isLoading ? <ButtonLoading/> : <Button className="mt-5 mx-5 w-72 h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" type="submit">Saída</Button>}
                     </div>
                 </div>
             </div>
