@@ -1,7 +1,7 @@
 'use client'
 
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { SyntheticEvent, useState } from "react";
 
 import { Button } from "@/components/ui/button"
@@ -18,20 +18,19 @@ import { Label } from "@/components/ui/label"
 import Link from "next/link";
 import Image from 'next/image'
 import { ButtonProcess } from "@/components/ButtonLoading";
+import { useToast } from "../../components/ui/use-toast"
 
 export default function Home() {
+
+  const { toast } = useToast()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [isLoading, setIsLoading] = useState(false)
-  
-
   const router = useRouter()
 
-  function handleClick(event: SyntheticEvent) {
-      setIsLoading(true)
-  }
 
   async function handleSubmit(event: SyntheticEvent) {
+    setIsLoading(true)
     event.preventDefault()
 
     const result = await signIn('credentials', {
@@ -41,11 +40,25 @@ export default function Home() {
     })
 
     if (result?.error) {
-      console.log(result)
-      setIsLoading(false)
-    }
+      toast({
+        variant: "destructive",
+        title: "Falha no login!",
+        description: "Email ou palavra-passe incorreta" })
+        
+        setIsLoading(false)
+        setEmail('')
+        setPassword('')
+  }
 
-    router.replace('/admin')
+    else {
+
+      window.location.reload()
+      router.replace('/admin')
+
+    }
+    
+  
+    
   }
 
   return (
@@ -58,7 +71,7 @@ export default function Home() {
             <CardHeader className="space-y-1">
               <CardTitle className="text-2xl">Fazer Login</CardTitle>
               <CardDescription>
-                Enter your email and password
+                Insira o seu email e palavra-passe
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-4">
@@ -72,7 +85,7 @@ export default function Home() {
               </div>
             </CardContent>
             <CardFooter>
-              {isLoading ? <ButtonProcess/> : <Button className="w-full h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" onClick={handleClick} type="submit">Entrar</Button>}
+              {isLoading ? <ButtonProcess/> : <Button className="w-full h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" type="submit">Entrar</Button>}
               {/* <Button className="w-full h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" type="submit">Entrar</Button> */}
             </CardFooter>
         </Card>
