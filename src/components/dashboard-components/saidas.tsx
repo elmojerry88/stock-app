@@ -28,7 +28,7 @@ export function RecentSales() {
                 {leave.id} - {leave.nip_officer}
               </p>
             </div>
-            <div className="ml-auto font-medium">{leave.weapon} {leave.weapon_number}</div>
+            <div className="ml-auto font-medium">{leave.weapon}</div>
          </div>
         ))}
       </div>
