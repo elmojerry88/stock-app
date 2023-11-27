@@ -4,7 +4,11 @@ import { api } from '@/app/api/api_stock';
 import { useQuery } from "react-query";
 
 export default function UsersTable(){
-    const { data, isError, isLoading } = useQuery("getUser", api.getUser);
+    const { data } = useQuery("getUser", api.getUser, {
+        refetchOnWindowFocus: false,
+        refetchInterval: 60000,
+        retryDelay: 60000
+    });
     return (
 
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

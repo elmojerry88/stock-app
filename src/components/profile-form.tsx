@@ -6,23 +6,46 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { api } from "@/app/api/api_stock";
 import { SyntheticEvent} from "react";
+import { useToast } from "./ui/use-toast"
+import { ButtonLoading } from "@/components/ButtonLoading";
 
 
 export function ProfileForm() {
 
+  const { toast } = useToast()
 
   const [name, setName] = useState();
   const [division, setDivision] = useState();
   const [category, setCategoy] = useState();
-  const [gender, setGender] = useState();
   const [nip, setNip] = useState();
 
-  const {isLoading ,isError, mutate } = useMutation( () => 
+  const { mutate, isLoading } = useMutation( () => 
   api.addOfficer(name, division, category, nip),{
+
+    onSuccess(data, variables, context) {
+      
+      setName(""),
+      setDivision(""),
+      setCategoy(""),
+      setNip(""),
+
+      toast({
+        variant: "default",
+        description: " Agente registrado!! "})
+    },
+
+    onError(error, variables, context) {
+      toast({
+        variant: "destructive",
+        title: "Ups! Algo correu mal. ",
+        description: `${error.response.data.message}`  ,
+    })
+    },
+
   }
 )
 
-const officer = {name, division, category, nip, gender}
+const officer = {name, division, category, nip}
 
 function handleSubmit(event: SyntheticEvent){
   event.preventDefault();
@@ -56,7 +79,7 @@ function handleSubmit(event: SyntheticEvent){
                   <h3 className="text-muted-foreground text-sm mt-2">O nip deve ser válido e correspondente ao agente</h3>
                 </div>
                 <div>
-                  <Button className="mt-5 mx-5 w-72 h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" type="submit">Criar</Button>
+                  {isLoading ? <ButtonLoading/> : <Button className="mt-5 mx-5 w-72 h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" type="submit">Criar conta</Button>}
                 </div>
                 
             </div>

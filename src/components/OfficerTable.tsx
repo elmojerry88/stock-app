@@ -40,9 +40,9 @@ export default function OfficerTable(){
                             </tr>
                         </thead>
                         <tbody>
-                        {data?.map( (officer) => (
+                        {data?.map( (officer: any) => (
 
-                                <tr class="bg-white border-b dark:bg-blue-950 dark:border-gray-800">
+                                <tr class="bg-white border-b dark:bg-blue-950 dark:border-gray-800" key={officer.id}>
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white hover:bg-blue-950">
                                         {officer.id}
                                     </th>

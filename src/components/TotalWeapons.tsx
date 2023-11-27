@@ -15,7 +15,11 @@ import { useQuery } from "react-query";
 
 export default function TotalWeapons(){
 
-    const { data, isError, isLoading } = useQuery("SumWeapon", api.getSumWeapon);
+    const { data } = useQuery("SumWeapon", api.getSumWeapon, {
+      refetchOnWindowFocus: false,
+      refetchInterval: 60000,
+      retryDelay: 60000
+    });
 
 
     return (

@@ -6,9 +6,13 @@ import { useState } from "react"
 import { useMutation, useQueryClient } from "react-query";
 import { api } from "@/app/api/api_stock";
 import { SyntheticEvent} from "react";
+import { useToast } from "./ui/use-toast"
+import { ButtonLoading } from "@/components/ButtonLoading";
 
 
 export function WeaponForm() {
+
+  const { toast } = useToast()
 
   const [name, setName] = useState()
   const [model, setModel] = useState()
@@ -18,8 +22,29 @@ export function WeaponForm() {
 
   const weapon = {name, model, type, qtd_weapons_bullets, quantity_stock}
 
-  const {isLoading ,isError, mutate } = useMutation( () => 
+  const { mutate, isLoading } = useMutation( () => 
   api.addWeapon(name, model, type, qtd_weapons_bullets, quantity_stock),{
+
+    onSuccess(data, variables, context) {
+      setName(""),
+      setModel(""),
+      setType(""),
+      setQtdWeaponsBullets(""),
+      setQuantityStock(""),
+
+      toast({
+        variant: "default",
+        description: " Arma registrada!! "})
+    },
+
+    onError(error, variables, context) {
+      toast({
+        variant: "destructive",
+        title: "Ups! Algo correu mal. ",
+        description: `${error.response.data.message}`  ,
+    })
+    },
+
   }
 )
 
@@ -58,7 +83,7 @@ export function WeaponForm() {
                   <h3 className="text-muted-foreground text-sm mt-2">O número de stock da arma</h3>
                 </div>
                 <div>
-                  <Button className="mt-5 mx-5 w-72 h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" type="submit">Criar</Button>
+                  {isLoading ? <ButtonLoading/> : <Button className="mt-5 mx-5 w-72 h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" type="submit">Registrar</Button>}
                 </div>
                 
             </div>

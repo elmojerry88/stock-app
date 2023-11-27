@@ -6,11 +6,15 @@ import { useState } from "react"
 import { useMutation,  useQuery } from "react-query";
 import { api } from "@/app/api/api_stock";
 import { SyntheticEvent} from "react";
+import { useToast } from "./ui/use-toast"
+import { ButtonLoading } from "@/components/ButtonLoading";
 
 
 
 
 export default function RegisterReceive(){
+
+    const { toast } = useToast()
 
     const [officerReceive, setOfficerReceive] = useState()
     const [weaponReceive, setWeaponReceive] = useState()
@@ -28,6 +32,28 @@ export default function RegisterReceive(){
 
     const {isLoading ,isError, mutate } = useMutation( () => 
         api.addReceive(officerReceive, weaponReceive, qtdBulletsReceive, weaponNumberReceive),{
+           onSuccess: () => {
+            setOfficerReceive(""),
+            setWeaponReceive(""),
+            setQtdBulletsReceive(""),
+            setWeaponNumberReceive(""),
+
+            toast({
+                variant: "default",
+                description: "Entrada registrada!"  ,
+            })
+
+           },
+
+           onError: (error)=> {
+
+                toast({
+                    variant: "destructive",
+                    title: "Ups! Algo correu mal. ",
+                    description: `${error.response.data}`  ,
+                })
+
+           }
     })
 
     const { data} = useQuery("getWeapon", api.getWeapon);
@@ -48,7 +74,7 @@ export default function RegisterReceive(){
                         <h3 className="mt-2 text-sm font-bold"> Arma </h3>
                         <select value={weaponReceive} onChange={(e)=> setWeaponReceive(e.target.value)} id="officers" class="border bg-background text-sm rounded-lg block w-full p-2.5 border-white mt-2">
                             <option selected  className="text-muted-foreground text-sm text-gray-600">Selecione a arma</option>
-                            {data?.map( (officer)=> (
+                            {data?.map( (officer: any)=> (
                                 <option key={officer.id} value={officer.id}>{officer.name}</option>
                             ))}
                             
@@ -68,9 +94,8 @@ export default function RegisterReceive(){
                         <h3 className="text-muted-foreground text-sm mt-2">O número de balas entregue</h3>
                     </div>
                     <div>
-                        <Button className="mt-5 mx-5 w-72 h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" type="submit">Entrada</Button>
+                        {isLoading ? <ButtonLoading/> : <Button className="mt-5 mx-5 w-72 h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" type="submit">Entrada</Button>}</div>
                     </div>
-                </div>
             </div>
     </form>
 

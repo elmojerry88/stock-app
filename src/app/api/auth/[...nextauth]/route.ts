@@ -14,7 +14,11 @@ const nextAuthOptions: NextAuthOptions = {
 				const response = await fetch('http://localhost:8000/api/login', {
 					method: 'POST',
 					headers: {
-						'Content-type': 'application/json'
+						"Content-Type": "application/json",
+						"Accept": "application/json",
+						'Access-Control-Allow-Origin': '*',
+						'Access-Control-Allow-Headers': '*',
+						'Access-Control-Allow-Credentials': 'true',
 					},
 					body: JSON.stringify({
 						email: credentials?.email,

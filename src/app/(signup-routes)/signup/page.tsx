@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from "react";
-import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -19,6 +18,7 @@ import { api } from "@/app/api/api_stock";
 import { SyntheticEvent} from "react";
 import { ButtonLoading } from "@/components/ButtonLoading";
 import { toast } from "@/components/ui/use-toast"
+import { ToastAction } from "@/components/ui/toast"
 
 
 export default function Home() {
@@ -26,12 +26,36 @@ export default function Home() {
   const [second_name, setSecond_name] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const [gender, setGender] = useState<string>('')
   
   const user = {first_name, second_name, email, password}
   const client = useQueryClient();
   
   const {isLoading ,isError, mutate } = useMutation( () => 
-    api.addUser(first_name, second_name, email, password),{
+    api.addUser(first_name, second_name, email, password, gender),{
+      
+      onSuccess(data, variables, context) {
+        setFirst_name(""),
+        setSecond_name(""),
+        setEmail(""),
+        setPassword(""),
+
+        toast({
+          variant: "default",
+          title:"Usuário criado" ,
+          description: "Faça login",
+          action: <ToastAction altText="fazer login"> <Link href="/">Fazer login</Link> </ToastAction>,
+        })
+      },
+
+      onError(error, variables, context) {
+        toast({
+          variant: "destructive",
+          title: "Ups! Algo correu mal. ",
+          description: `${error.response.data.message}`  ,
+      })
+      },
+
     }
   )
   
@@ -79,6 +103,16 @@ export default function Home() {
                 <Label htmlFor="password" >Password</Label>
                 <Input id="password" value={password} type="password" className="border-border-foreground" name="password" onChange={(e) => setPassword(e.target.value)} />
                 <h1 className="text-sm text-gray-500">A password deve ter no minímo 8 caracteres</h1>
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="password" >Password</Label>
+                <select value={gender} onChange={(e)=> setGender(e.target.value)} id="officers" className="border bg-background text-sm rounded-lg block w-full p-2.5 border-white mt-2">
+                  <option selected  className="text-muted-foreground text-sm text-gray-600">Selecione o seu género</option>
+                  <option >masculino</option>
+                  <option >feminino</option>
+                  <option >outro</option>
+                </select>
+                <h1 className="text-sm text-gray-500"></h1>
               </div>
             </CardContent>
             <CardFooter>

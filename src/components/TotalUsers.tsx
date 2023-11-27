@@ -13,7 +13,9 @@ import { useQuery } from "react-query";
 
 export default function TotalUsers(){
 
-    const { data, isError, isLoading } = useQuery("UsersCount", api.UsersCount);
+    const { data } = useQuery("UsersCount", api.UsersCount, {
+        refetchOnWindowFocus: false,
+    });
     return (
         <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">

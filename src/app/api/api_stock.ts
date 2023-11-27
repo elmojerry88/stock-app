@@ -1,124 +1,98 @@
 import axios from "axios"
 import { User } from "../../models/User";
 
-import { toast } from "react-toastify";
-
-
-
-
-
-axios.defaults.withCredentials = true;
-
-// axios.interceptors.response.use(undefined, (error)=> {
-
-//     if (error.message === 'Network Error' && !error.response){
-//             toast.error("Erro")
-//         }
-// })
-
 const url = axios.create({
-    baseURL: "http://localhost:8000/api"
-})
+    baseURL: "http://localhost:8000/api" ,
+    
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*',
+      'Access-Control-Allow-Credentials': 'true',
 
+    },
+    withCredentials: true,
+  })
+  
 
+export async function addUser(first_name:String, second_name:String, email:String, password:String, gender: string){
 
-
-export async function addUser(first_name:String, second_name:String, email:String, password:String){
-
-        const response =  await url.post<User[]>("/user/store", {first_name, second_name, email, password},
-         { headers: {'Content-Type': 'application/json', Accept: 'application/json',
-         'Access-Control-Allow-Origin': '*',
-         'Access-Control-Allow-Headers': '*',
-         'Access-Control-Allow-Credentials': 'true',}, }).then(function (response){
+        const response: any =  await url.post<User[]>("/user/store", {first_name, second_name, email, password, gender})
+        .then(function (response){
             return response.data
-         }).catch(function (error){
-            if (error.response){
-                return response.error.message
-                // console.log(error.response.data.message)
-                // console.log(error.response.status)
-                // console.log(error.response.header)
-            } else if(error.request){
-                // return response.error.request
-                console.log(error.request)
-            } else {
-                // console.log ('Error', error.message)
-            }
          })
-        return
-
-
-
+    
+        axios.interceptors.request.use(function (config) {
+            return config;
+        }, function (error) {
+            return Promise.reject(error);
+        });
 }
 
 export async function addOfficer(name:String, division:String, category:String, nip: number){
-    try {
+ 
 
-        const response =  await url.post<User[]>("/officer/store", {name, division, category, nip},
-         { headers: {'Content-Type': 'application/json', Accept: 'application/json',
-         'Access-Control-Allow-Origin': '*',
-         'Access-Control-Allow-Headers': '*',
-         'Access-Control-Allow-Credentials': 'true',}, })
+    const response =  await url.post<User[]>("/officer/store", {name, division, category, nip},).then( function (response) {
         return response.data
+    })
+        
+    axios.interceptors.request.use(function (config) {
+        return config;
+      }, function (error) {
+        return Promise.reject(error);
+      });
 
-    } catch (error) {
-
-        console.log(error)
-
-    }
+   
 
 }
 
 export async function addWeapon(name: String, model: String, type: String, qtd_weapons_bullets: number, quantity_stock: number){
-    try {
+   
 
-        const response =  await url.post<User[]>("/weapon/store", {name, model, type, qtd_weapons_bullets, quantity_stock},
-         { headers: {'Content-Type': 'application/json', Accept: 'application/json',
-         'Access-Control-Allow-Origin': '*',
-         'Access-Control-Allow-Headers': '*',
-         'Access-Control-Allow-Credentials': 'true',}, })
+    const response =  await url.post<User[]>("/weapon/store", {name, model, type, qtd_weapons_bullets, quantity_stock},).then( function (response) {
         return response.data
-
-    } catch (error) {
-
-        console.log(error)
-
-    }
+    })
+    
+    axios.interceptors.request.use(function (config) {
+        return config;
+      }, function (error) {
+        return Promise.reject(error);
+      });
+  
 
 }
 
 
 export async function addReceive(officerReceive: String, weaponReceive: String, qtdBulletsReceive: number, weaponNumberReceive:string){
-    try {
 
-        const response =  await url.post<User[]>("/receive/store", {officerReceive, weaponReceive, qtdBulletsReceive, weaponNumberReceive},
-         { headers: {'Content-Type': 'application/json', Accept: 'application/json',
-         'Access-Control-Allow-Origin': '*',
-         'Access-Control-Allow-Headers': '*',
-         'Access-Control-Allow-Credentials': 'true',}, })
+    const response: any =  await url.post<User[]>("/receive/store", {officerReceive, weaponReceive, qtdBulletsReceive, weaponNumberReceive},).then( function (response) {
         return response.data
+    })
+        
+    axios.interceptors.request.use(function (config) {
+        return config;
+      }, function (error) {
+        return Promise.reject(error);
+      });
 
-    } catch (error) {
-
-        console.log(error)
-
-    }
 
 }
 export async function addLeave(officerLeave: String, weaponLeave: String, qtdBulletsLeave: number, weaponNumberLeave:string){
-    try {
+    
+    
 
-        const response =  await url.post<User[]>("/leave/store", {officerLeave, weaponLeave, qtdBulletsLeave, weaponNumberLeave},
-         { headers: {'Content-Type': 'application/json', Accept: 'application/json',
-         'Access-Control-Allow-Origin': '*',
-         'Access-Control-Allow-Headers': '*',
-         'Access-Control-Allow-Credentials': 'true',}, })
+    const response: any =  await url.post<User[]>("/leave/store", {officerLeave, weaponLeave, qtdBulletsLeave, weaponNumberLeave},).then( function (response){
         return response.data
+    })
+   
+    axios.interceptors.request.use(function (config) {
+        return config;
+      }, function (error) {
+        return Promise.reject(error);
+      });
 
-    } catch (error) {
-
-        console.log(error)
-
-    }
+   
 
 }
 
@@ -183,14 +157,6 @@ export async function getLeave(){
 }
 
 
-
-// export const updateTodo = async (todo) => {
-//     return await todosApi.patch(`/todos/${todo.id}`, todo)
-// }
-
-// export const deleteTodo = async ({ id }) => {
-//     return await todosApi.delete(`/todos/${id}`, id)
-// }
 
 export const api = {
     getUser,

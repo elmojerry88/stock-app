@@ -47,9 +47,9 @@ export default function ReceiveTable(){
                 </thead>
                 <tbody>
 
-                    {data?.map((receive) => (
+                    {data?.map((receive: any) => (
 
-                                <tr class="bg-white border-b dark:bg-blue-950 dark:border-gray-800">
+                                <tr class="bg-white border-b dark:bg-blue-950 dark:border-gray-800" key={receive.id}>
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {receive.officer}
                                     </th>

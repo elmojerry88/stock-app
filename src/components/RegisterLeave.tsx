@@ -6,7 +6,8 @@ import { useState } from "react"
 import { useMutation,  useQuery } from "react-query";
 import { api } from "@/app/api/api_stock";
 import { SyntheticEvent} from "react";
-import { useToast } from "./ui/use-toast";
+import { useToast } from "./ui/use-toast"
+import { ButtonLoading } from "@/components/ButtonLoading";
 
 
 
@@ -31,25 +32,25 @@ export default function RegisterLeave(){
 
   }
 
-    const {isLoading  , mutate , error} = useMutation( () =>
+    const {mutate, isLoading } = useMutation( () =>
         api.addLeave(officerLeave, weaponLeave, qtdBulletsLeave, weaponNumberLeave),{
             onSuccess: ()=> {
                 setOfficerLeave(""),
                 setWeaponLeave(""),
                 setQtdBulletsLeave(""),
                 setWeaponNumberLeave("")
-                // toast({
-                //     variant: "destructive",
-                //     title: "Uh oh! Something went wrong.",
-                //     description: "There was a problem with your request.",
-                // })
-                console.log(response)
+
+                toast({
+                    variant: "default",
+                    description: "Saída registrada!"  ,
+                })
+
             },
             onError: (error, variables, context) => {
                 toast({
                     variant: "destructive",
-                    title: "esse é o teu erro",
-                    description: `${error}`  ,
+                    title: "Ups! Algo correu mal. ",
+                    description: `${error.response.data}`  ,
                 })
 
             }
@@ -82,7 +83,7 @@ export default function RegisterLeave(){
                         <h3 className="mt-2 text-sm font-bold"> Arma </h3>
                         <select value={weaponLeave} onChange={(e)=> setWeaponLeave(e.target.value)} id="officers" class="border bg-background text-sm rounded-lg block w-full p-2.5 border-white mt-2">
                             <option selected  className="text-muted-foreground text-sm text-gray-600">Selecione a arma</option>
-                            {data?.map( (weapon)=> (
+                            {data?.map( (weapon: any)=> (
                                 <option key={weapon.id} value={weapon.id}>{weapon.name}</option>
                             ))}
                         </select>
@@ -101,7 +102,7 @@ export default function RegisterLeave(){
                         <h3 className="text-muted-foreground text-sm mt-2">O número de balas entregue</h3>
                     </div>
                     <div>
-                        <Button className="mt-5 mx-5 w-72 h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" type="submit">Saída</Button>
+                        {isLoading ? <ButtonLoading/> : <Button className="mt-5 mx-5 w-72 h-12 rounded-md bg-blue-800 text-white hover:bg-blue-950" type="submit">Entrada</Button>}
                     </div>
                 </div>
             </div>
