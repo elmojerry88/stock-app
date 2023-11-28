@@ -1,4 +1,4 @@
-## Front-End da Aplicação de controlo de estoque
+## Front-End da Aplicação de controlo de estoque v2.1
 
 - Desenvolvido por: Elmo Jerry Imperial Leitão
 
