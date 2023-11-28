@@ -35,6 +35,10 @@ pnpm run dev
 
 - Abra [http://localhost:3000](http://localhost:3000) com o seu navegador para usar a aplicação.
 
+### Novidades:
+
+- Na versão 2.1 agora é possivel receber notificações vindas do backend.
+
 
 ## NOTA:
 
