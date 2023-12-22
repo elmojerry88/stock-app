@@ -16,24 +16,24 @@ export default function RegisterReceive(){
 
     const { toast } = useToast()
 
-    const [officerReceive, setOfficerReceive] = useState()
+    const [nipReceive, setNipReceive] = useState()
     const [weaponReceive, setWeaponReceive] = useState()
     const [qtdBulletsReceive, setQtdBulletsReceive] = useState()
     const [weaponNumberReceive, setWeaponNumberReceive] = useState()
     
  
-    const receive = {officerReceive, weaponReceive, qtdBulletsReceive, weaponNumberReceive}
+    const receive = {nipReceive, weaponReceive, qtdBulletsReceive, weaponNumberReceive}
 
     function handleSubmit(event: SyntheticEvent){
         event.preventDefault();
         console.log(receive)
-        mutate(officerReceive, weaponReceive, qtdBulletsReceive, weaponNumberReceive)
+        mutate(nipReceive, weaponReceive, qtdBulletsReceive, weaponNumberReceive)
   }
 
     const {isLoading ,isError, mutate } = useMutation( () => 
-        api.addReceive(officerReceive, weaponReceive, qtdBulletsReceive, weaponNumberReceive),{
+        api.addReceive(nipReceive, weaponReceive, qtdBulletsReceive, weaponNumberReceive),{
            onSuccess: () => {
-            setOfficerReceive(""),
+            setNipReceive(""),
             setWeaponReceive(""),
             setQtdBulletsReceive(""),
             setWeaponNumberReceive(""),
@@ -66,9 +66,9 @@ export default function RegisterReceive(){
                 <h3 className="text-sm text-muted-foreground col-span-4 mx-5 ">Formulário de cadastro de entradas</h3>
                 <div className="grid items-center">
                     <div className="mx-5">
-                        <h3 className="mt-2 text-sm font-bold">Nome do agente</h3>
-                        <Input className="border-white mt-2" required value={officerReceive} onChange={(e)=> setOfficerReceive(e.target.value)} placeholder="nome completo" />
-                        <h3 className="text-muted-foreground text-sm mt-2">O agente que devolveu a arma</h3>
+                        <h3 className="mt-2 text-sm font-bold">NIP</h3>
+                        <Input className="border-white mt-2" required value={nipReceive} onChange={(e)=> setNipReceive(e.target.value)} placeholder="nip do agente" />
+                        <h3 className="text-muted-foreground text-sm mt-2">O nip do agente que devolveu a arma</h3>
                     </div>
                     <div className="mx-5">
                         <h3 className="mt-2 text-sm font-bold"> Arma </h3>

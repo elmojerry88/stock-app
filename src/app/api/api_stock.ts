@@ -30,7 +30,7 @@ export async function addUser(first_name:String, second_name:String, email:Strin
         });
 }
 
-export async function addOfficer(name:String, division:String, category:String, nip: number){
+export async function addOfficer(name:String, division:String, category:String, nip: String){
  
 
     const response =  await url.post<User[]>("/officer/store", {name, division, category, nip},).then( function (response) {
@@ -43,7 +43,7 @@ export async function addOfficer(name:String, division:String, category:String, 
         return Promise.reject(error);
       });
 
-   
+    console.log(response)
 
 }
 
@@ -64,9 +64,9 @@ export async function addWeapon(name: String, model: String, type: String, qtd_w
 }
 
 
-export async function addReceive(officerReceive: String, weaponReceive: String, qtdBulletsReceive: number, weaponNumberReceive:string){
+export async function addReceive(nipReceive: String, weaponReceive: String, qtdBulletsReceive: number, weaponNumberReceive:string){
 
-    const response: any =  await url.post<User[]>("/receive/store", {officerReceive, weaponReceive, qtdBulletsReceive, weaponNumberReceive},).then( function (response) {
+    const response: any =  await url.post<User[]>("/receive/store", {nipReceive, weaponReceive, qtdBulletsReceive, weaponNumberReceive},).then( function (response) {
         return response.data
     })
         
@@ -78,11 +78,11 @@ export async function addReceive(officerReceive: String, weaponReceive: String, 
 
 
 }
-export async function addLeave(officerLeave: String, weaponLeave: String, qtdBulletsLeave: number, weaponNumberLeave:string){
+export async function addLeave(nipLeave: String, weaponLeave: String, qtdBulletsLeave: number, weaponNumberLeave:string){
     
     
 
-    const response: any =  await url.post<User[]>("/leave/store", {officerLeave, weaponLeave, qtdBulletsLeave, weaponNumberLeave},).then( function (response){
+    const response: any =  await url.post<User[]>("/leave/store", {nipLeave, weaponLeave, qtdBulletsLeave, weaponNumberLeave},).then( function (response){
         return response.data
     })
    
@@ -156,6 +156,12 @@ export async function getLeave(){
     return response.data
 }
 
+export async function getRegister(){
+    const response = await url.get("/register/")
+
+    return response.data
+}
+
 
 
 export const api = {
@@ -174,4 +180,5 @@ export const api = {
     addReceive,
     getLeave,
     addLeave,
+    getRegister,
 }

@@ -13,7 +13,7 @@ import { ButtonLoading } from "@/components/ButtonLoading";
 
 export default function RegisterLeave(){
 
-    const [officerLeave, setOfficerLeave] = useState()
+    const [nipLeave, setNipLeave] = useState()
     const [weaponLeave, setWeaponLeave] = useState()
     const [qtdBulletsLeave, setQtdBulletsLeave] = useState()
     const [weaponNumberLeave, setWeaponNumberLeave] = useState()
@@ -21,19 +21,19 @@ export default function RegisterLeave(){
     const { toast } = useToast()
 
 
-    const leave = {officerLeave, weaponLeave, qtdBulletsLeave, weaponNumberLeave}
+    const leave = {nipLeave, weaponLeave, qtdBulletsLeave, weaponNumberLeave}
 
     function handleSubmit(event: SyntheticEvent){
         event.preventDefault();
         console.log(leave)
-        mutate(officerLeave, weaponLeave, qtdBulletsLeave, weaponNumberLeave)
+        mutate(nipLeave, weaponLeave, qtdBulletsLeave, weaponNumberLeave)
         
 
 
   }
 
     const {mutate, isLoading } = useMutation( () =>
-        api.addLeave(officerLeave, weaponLeave, qtdBulletsLeave, weaponNumberLeave),{
+        api.addLeave(nipLeave, weaponLeave, qtdBulletsLeave, weaponNumberLeave),{
             onSuccess: ()=> {
                 setOfficerLeave(""),
                 setWeaponLeave(""),
@@ -68,16 +68,14 @@ export default function RegisterLeave(){
     return (
         <form className="" onSubmit={handleSubmit}>
 
-        
-
             <div className="grid gap-2 border rounded-md p-5 mt-2">
                 <h3 className="text-lg font-bold col-span-4 mx-5 ">Registro de saída</h3>
                 <h3 className="text-sm text-muted-foreground col-span-4 mx-5 ">Formulário de cadastro de entradas</h3>
                 <div className="grid items-center">
                     <div className="mx-5">
-                        <h3 className="mt-2 text-sm font-bold">Nome do agente</h3>
-                        <Input className="border-white mt-2" required value={officerLeave} onChange={(e)=> setOfficerLeave(e.target.value)} placeholder="nome completo" />
-                        <h3 className="text-muted-foreground text-sm mt-2">O agente que lhe foi atribuido a arma</h3>
+                        <h3 className="mt-2 text-sm font-bold">NIP</h3>
+                        <Input className="border-white mt-2" required value={nipLeave} onChange={(e)=> setNipLeave(e.target.value)} placeholder="nip do agente" />
+                        <h3 className="text-muted-foreground text-sm mt-2">O nip agente que lhe foi atribuido a arma</h3>
                     </div>
                     <div className="mx-5">
                         <h3 className="mt-2 text-sm font-bold"> Arma </h3>

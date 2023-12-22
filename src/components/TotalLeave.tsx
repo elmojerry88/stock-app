@@ -38,7 +38,7 @@ export default function TotalWeapons(){
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">+{data}</div>
+                    <div className="text-2xl font-bold">{data}</div>
                     <p className="text-xs text-muted-foreground">
                       Números de armas entregue aos agentes
                     </p>

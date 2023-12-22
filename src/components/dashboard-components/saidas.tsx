@@ -25,7 +25,7 @@ export function RecentSales() {
             <div className="ml-4 space-y-1" >
               <p className="text-sm font-medium leading-none">{leave.officer}</p>
               <p className="text-sm text-muted-foreground">
-                {leave.id} - {leave.nip_officer}
+                NIP - {leave.nip_officer}
               </p>
             </div>
             <div className="ml-auto font-medium">{leave.weapon}</div>

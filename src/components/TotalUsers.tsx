@@ -38,7 +38,7 @@ export default function TotalUsers(){
             </svg>
             </CardHeader>
             <CardContent>
-            <div className="text-2xl font-bold">+{data}</div>
+            <div className="text-2xl font-bold">{data}</div>
             <p className="text-xs text-muted-foreground">
                 Esse número corresponde ao número de usuários cadastrados
             </p>

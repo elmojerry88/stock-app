@@ -36,7 +36,7 @@ export default function TotalOfficers(){
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">+{data}</div>
+                    <div className="text-2xl font-bold">{data}</div>
                     <p className="text-xs text-muted-foreground">
                       incluindo todas as unidades
                     </p>

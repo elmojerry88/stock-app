@@ -16,6 +16,7 @@ import WeaponTable from "../WeaponTable"
 import ReceiveTable from "../ReceiveTablex"
 import UsersTable from "../UsersTables"
 import OfficerTable from "../OfficerTable"
+import RegisterTable from "../RegisterTable"
 
 
 // export const metadata: Metadata = {
@@ -57,7 +58,9 @@ export default function DashboardPage() {
             </TabsList>
             <TabsContent value="overview" className="space-y-4">
               
+              
               <DashboardCards/>
+              <RegisterTable />
               <WeaponTable />
               <ReceiveTable />
               <UsersTable />
